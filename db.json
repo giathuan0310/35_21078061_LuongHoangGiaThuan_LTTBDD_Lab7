@@ -1,0 +1,86 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "user1",
+      "password": "password1",
+      "name": "User 1"
+    },
+    {
+      "id": "cf6d",
+      "username": "truongmai123",
+      "password": "123",
+      "name": "Truong Mai"
+    },
+    {
+      "id": "78d6",
+      "username": "truong123",
+      "password": "123",
+      "name": "Truong 123"
+    },
+    {
+      "id": "04is6fpde",
+      "username": "abc",
+      "password": "123",
+      "name": "abc"
+    },
+    {
+      "id": "i9sulylrt",
+      "username": "truongochos",
+      "password": "123",
+      "name": "truongochos"
+    },
+    {
+      "id": "1e4d",
+      "name": "Mai Quốc Trưởng",
+      "username": "truongmai",
+      "password": "123"
+    },
+    {
+      "id": "2f05",
+      "name": "aaaa",
+      "username": "aaa123",
+      "password": "123"
+    },
+    {
+      "id": "146e",
+      "name": "Thiện Trọng",
+      "username": "moonthien",
+      "password": "123"
+    },
+    {
+      "id": "ea76",
+      "name": "Hieu Nhan",
+      "username": "hieunhan123",
+      "password": "123"
+    },
+    {
+      "id": "60fa",
+      "name": "Đại Lộc",
+      "username": "dailoc077",
+      "password": "123"
+    }
+  ],
+  "notes": [
+    {
+      "id": "3",
+      "content": "Learn JavaScript basic"
+    },
+    {
+      "id": "4",
+      "content": "Learn HTML Advance"
+    },
+    {
+      "id": "5",
+      "content": "Medical App UI"
+    },
+    {
+      "id": "6",
+      "content": "Learn Java"
+    },
+    {
+      "id": "ecf0",
+      "content": "aasdasd"
+    }
+  ]
+}
