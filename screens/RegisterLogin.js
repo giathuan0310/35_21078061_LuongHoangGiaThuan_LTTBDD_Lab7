@@ -1,60 +1,130 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Alert } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert, Image  } from 'react-native';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 const RegisterLogin = () => {
-  const [username, setUsername] = useState('');  // Đổi thành username
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
+  useFocusEffect(
+    useCallback(() => {
+      setPassword('');
+      setUsername('');
+    }, [])
+  );
+
   const handleLogin = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/users');
+      const response = await axios.get('https://6705d8bb031fd46a83111f3b.mockapi.io/users');
       const user = response.data.find(
         u => u.username.toLowerCase() === username.toLowerCase() && u.password === password
       );
 
       if (user) {
-        // Truyền tên đầy đủ (name) của người dùng vào NoteList
         navigation.navigate('NoteList', { userName: user.name });
       } else {
-        alert('Lỗi: Tên người dùng hoặc mật khẩu không đúng');
+        Alert.alert('Lỗi: Tên người dùng hoặc mật khẩu không đúng');
       }
     } catch (error) {
       console.error(error);
-      alert('Lỗi', 'Không thể kết nối đến máy chủ');
+      Alert.alert('Lỗi: Không thể kết nối đến máy chủ');
     }
   };
 
   const navigateToSignUp = () => {
-    navigation.navigate('SignUp'); // Điều hướng đến màn hình đăng ký
+    navigation.navigate('SignUp');
   };
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 24, marginBottom: 20 }}>Đăng Nhập</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image
+          source={require('../assets/image95.png')}
+          style={styles.image}
+        />
+      </View>
+      <Text style={styles.title}>Đăng Nhập</Text>
       <TextInput
         placeholder="Tên người dùng"
-        value={username}  // Sử dụng username
+        value={username}
         onChangeText={setUsername}
-        style={{ borderWidth: 1, marginBottom: 10, padding: 10 }}
+        style={styles.input}
       />
       <TextInput
         placeholder="Mật khẩu"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={{ borderWidth: 1, marginBottom: 20, padding: 10 }}
+        style={styles.input}
       />
-      <Button title="Đăng Nhập" onPress={handleLogin} />
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Đăng Nhập</Text>
+      </TouchableOpacity>
 
-      {/* Nút đăng ký */}
-      <View style={{ marginTop: 20 }}>
-        <Button title="Đăng Ký" onPress={navigateToSignUp} />
-      </View>
+      <TouchableOpacity onPress={navigateToSignUp}>
+        <Text style={styles.signUpText}>Chưa có tài khoản? Đăng Ký</Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',  
+    alignItems: 'center',
+    backgroundColor: '#fff', 
+    paddingHorizontal: 20,
+    paddingTop: 50,  
+  },
+  header: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  image: {
+    width: 220,
+    height: 220,
+    resizeMode: 'contain',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 30,
+  },
+  input: {
+    height: 50,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    backgroundColor: '#fff',
+    marginBottom: 15,
+  },
+  button: {
+    backgroundColor: '#007AFF', 
+    paddingVertical: 15,
+    width: '100%',
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  signUpText: {
+    color: '#007AFF', 
+    fontSize: 16,
+    textAlign: 'center',
+  },
+});
+
 
 export default RegisterLogin;
